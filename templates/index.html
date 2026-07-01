@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+  <title>Students Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; background: #f7f9fc; color: #1f2937; }
+    h1 { color: #0f766e; }
+    table { border-collapse: collapse; width: 100%; background: white; }
+    th, td { border: 1px solid #d1d5db; padding: 0.75rem; text-align: left; }
+    th { background: #e2e8f0; }
+  </style>
+</head>
+<body>
+  <h1>Students Dashboard</h1>
+  <p>This page is served by the Dockerized Flask app.</p>
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Name</th><th>Course</th><th>Grade</th></tr>
+    </thead>
+    <tbody>
+      {% for student in students %}
+      <tr><td>{{ student[0] }}</td><td>{{ student[1] }}</td><td>{{ student[2] }}</td><td>{{ student[3] }}</td></tr>
+      {% else %}
+      <tr><td colspan='4'>No students found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>
