@@ -12,14 +12,18 @@ jobs:
 
       - name: Create .env
         run: |
-          cat > .env << EOF
+          cat > .env << EOF2
           DB_NAME=${{ secrets.DB_NAME }}
           DB_USER=${{ secrets.DB_USER }}
-          DOCKER_PASSWORD=${{ secrets.DOCKER_PASSWORD }}
-          DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}
+          DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+          DOCKER_HUB_USERNAME=${{ secrets.DOCKER_HUB_USERNAME }}
+          DOCKER_HUB_PASSWORD=${{ secrets.DOCKER_HUB_PASSWORD }}
           IMAGE_NAME=${{ secrets.IMAGE_NAME }}
           IMAGE_TAG=${{ secrets.IMAGE_TAG }}
-          EOF
+          EOF2
+
+      - name: Docker Login
+        run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
       - name: Start Application
         run: docker compose up -d
